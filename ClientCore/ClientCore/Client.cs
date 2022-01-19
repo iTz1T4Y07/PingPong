@@ -32,8 +32,8 @@ namespace ClientCore
                 T input = _inputGetter.GetInput();
                 _socket.Send(_dataConverter.Convert(input));
                 byte[] receivedData = new byte[1024];
-                _socket.Receive(receivedData.Where(byteValue => byteValue != 0).ToArray());
-                Console.WriteLine(Encoding.ASCII.GetString(receivedData));
+                _socket.Receive(receivedData);
+                Console.WriteLine(Encoding.ASCII.GetString(receivedData.Where(byteValue => byteValue != 0).ToArray()));
             }
         }
     }
