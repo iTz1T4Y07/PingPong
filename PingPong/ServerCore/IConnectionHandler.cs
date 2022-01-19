@@ -9,6 +9,6 @@ namespace ServerCore
 {
     public interface IConnectionHandler<T>
     {
-        Task HandleNewConnection(T Client);
+        Task HandleNewConnection(T clientSocket);
     }
 }
