@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ServerCore
 {
-    class Server
+    public class Server
     {
         private Socket _serverSocket;
 
@@ -34,7 +34,7 @@ namespace ServerCore
                 //Log
             }
             _serverSocket.Listen(50);
-            Socket clientSocket = _serverSocket.Accept();            
+            Socket clientSocket = _serverSocket.Accept();          
         }
 
         public void Stop()
