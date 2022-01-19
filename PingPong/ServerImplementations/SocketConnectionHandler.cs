@@ -10,16 +10,22 @@ namespace ServerImplementations
 {
     public class SocketConnectionHandler : IConnectionHandler<Socket>
     {
+        private IDataProcessor dataProcessor;
+
         public async Task HandleNewConnection(Socket clientSocket)
         {            
             throw new NotImplementedException();
         }
 
-        private Task<byte[]> ReadData(Socket clientSocket)
+        private byte[] ReadData(Socket clientSocket)
         {
             byte[] buffer = new byte[1024];            
             clientSocket.Receive(buffer);
-            return new Task<byte[]>(() => buffer);
+            return buffer;
+        }
+
+        private void SendData(Socket clientSocket, byte[] dataBuffer)        {
+            clientSocket.Send(dataBuffer);
         }
     }
 }

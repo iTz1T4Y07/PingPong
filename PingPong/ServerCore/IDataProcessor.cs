@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ServerCore
 {
-    public interface IDataProcessor<T>
+    public interface IDataProcessor
     {
-        T GetDataToReturn(T receivedData);
+        byte[] GetDataToReturn(byte[] receivedData);
     }
 }
