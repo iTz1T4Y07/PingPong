@@ -43,11 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ServerCore\ServerCore.csproj">
+      <Project>{3398a1f3-cb13-4c57-89ba-be247085867e}</Project>
+      <Name>ServerCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServerImplementations\ServerImplementations.csproj">
+      <Project>{ef8e2eca-a240-49d0-b33d-8d7fe573322c}</Project>
+      <Name>ServerImplementations</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

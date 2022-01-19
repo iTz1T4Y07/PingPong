@@ -10,6 +10,8 @@ namespace PingPong
     {
         static void Main(string[] args)
         {
+            Bootstrapper bootsrapper = new Bootstrapper();
+            bootsrapper.Start();
         }
     }
 }

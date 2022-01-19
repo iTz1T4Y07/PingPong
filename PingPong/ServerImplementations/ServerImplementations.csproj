@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SocketConnectionHandler.cs" />
+    <Compile Include="StringDataProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ServerCore\ServerCore.csproj">

@@ -19,6 +19,7 @@ namespace PingPong
             IDataProcessor dataProcessor = new StringDataProcessor();
             IConnectionHandler<Socket> connectionHandler = new SocketConnectionHandler(dataProcessor);
             Server server = new Server(port, connectionHandler);
+            server.Start();
         }
 
     }
