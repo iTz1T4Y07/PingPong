@@ -24,5 +24,17 @@ namespace ClientCore
             _inputGetter = inputGetter;
             _dataConverter = dataConverter;
         }
+
+        public void Run()
+        {
+            while (true)
+            {
+                T input = _inputGetter.GetInput();
+                _socket.Send(_dataConverter.Convert(input));
+                byte[] receivedData = new byte[1024];
+                _socket.Receive(receivedData);
+                Console.WriteLine(Encoding.ASCII.GetString(receivedData));
+            }
+        }
     }
 }
