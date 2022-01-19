@@ -21,22 +21,23 @@ namespace ServerImplementations
         {
             while (true)
             {
-            Task<byte[]> readData = new Task<byte[]>(() => ReadData(clientSocket));
-            readData.Start();
-            byte[] receivedData = await readData;
-            SendData(clientSocket ,_dataProcessor.GetDataToReturn(receivedData));
+                Task<byte[]> readData = new Task<byte[]>(() => ReadData(clientSocket));
+                readData.Start();
+                byte[] receivedData = await readData;
+                SendData(clientSocket, _dataProcessor.GetDataToReturn(receivedData));
             }
         }
 
         private byte[] ReadData(Socket clientSocket)
         {
-            byte[] buffer = new byte[1024];            
+            byte[] buffer = new byte[1024];
             clientSocket.Receive(buffer);
             return buffer;
         }
 
-        private void SendData(Socket clientSocket, byte[] dataBuffer)        {
-            clientSocket.Send(dataBuffer);
+        private void SendData(Socket clientSocket, byte[] dataBuffer)
+        {                        
+            clientSocket.Send(dataBuffer.Where(byteValue => byteValue != 0).ToArray());
         }
     }
 }
