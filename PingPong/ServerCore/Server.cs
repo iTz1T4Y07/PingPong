@@ -15,11 +15,11 @@ namespace ServerCore
 
         private IPEndPoint _socketConfiguration;
 
-        private IConnectionHandler _connectionHandler;
+        private IConnectionHandler<Socket> _connectionHandler;
 
         private IList<Socket> _clientConnections;
 
-        public Server(int port, IConnectionHandler connectionHandler)
+        public Server(int port, IConnectionHandler<Socket> connectionHandler)
         {
             _connectionHandler = connectionHandler;
             _clientConnections = new List<Socket>();

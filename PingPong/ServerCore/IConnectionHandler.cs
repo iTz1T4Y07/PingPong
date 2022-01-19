@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace ServerCore
 {
-    public interface IConnectionHandler
+    public interface IConnectionHandler<T>
     {
-        Task HandleNewConnection(Socket clientSocket);
+        Task HandleNewConnection(T Client);
     }
 }
