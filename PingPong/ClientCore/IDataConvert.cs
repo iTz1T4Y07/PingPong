@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ClientCore
 {
-    public interface IDataConvert
+    public interface IDataConvert<T>
     {
+        byte[] Convert(T dataToConvert);
     }
 }
