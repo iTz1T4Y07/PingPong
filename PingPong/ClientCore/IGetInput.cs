@@ -8,5 +8,6 @@ namespace ClientCore
 {
     public interface IGetInput<T>
     {
+        T GetInput();
     }
 }
