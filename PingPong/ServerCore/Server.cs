@@ -13,7 +13,7 @@ namespace ServerCore
     {
         private Socket _serverSocket;
 
-        private IPEndPoint _socketConfiguration;
+        private readonly IPEndPoint _socketConfiguration;
 
         private IConnectionHandler<Socket> _connectionHandler;
 
