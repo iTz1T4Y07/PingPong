@@ -19,9 +19,13 @@ namespace ServerImplementations
 
         public async Task HandleNewConnection(Socket clientSocket)
         {
+            while (true)
+            {
             Task<byte[]> readData = new Task<byte[]>(() => ReadData(clientSocket));
+            readData.Start();
             byte[] receivedData = await readData;
             SendData(clientSocket ,_dataProcessor.GetDataToReturn(receivedData));
+            }
         }
 
         private byte[] ReadData(Socket clientSocket)
