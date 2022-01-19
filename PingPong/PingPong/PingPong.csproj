@@ -51,6 +51,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ClientCore\ClientCore.csproj">
+      <Project>{31fa7273-be20-407a-9885-be3e12a82318}</Project>
+      <Name>ClientCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClientImplementations\ClientImplementations.csproj">
+      <Project>{0627d4d7-9a85-4e83-beaa-1d87800de22c}</Project>
+      <Name>ClientImplementations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServerCore\ServerCore.csproj">
       <Project>{3398a1f3-cb13-4c57-89ba-be247085867e}</Project>
       <Name>ServerCore</Name>
