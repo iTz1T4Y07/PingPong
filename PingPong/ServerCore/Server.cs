@@ -15,8 +15,14 @@ namespace ServerCore
 
         private IPEndPoint _socketConfiguration;
 
-        public Server(int port)
-        {            
+        private IConnectionHandler _connectionHandler;
+
+        private IList<Socket> _clientConnections;
+
+        public Server(int port, IConnectionHandler connectionHandler)
+        {
+            _connectionHandler = connectionHandler;
+            _clientConnections = new List<Socket>();
             _serverSocket = new Socket(SocketType.Stream, ProtocolType.Tcp);
             _socketConfiguration = new IPEndPoint(IPAddress.Any, port);
             _serverSocket.Bind(_socketConfiguration);
@@ -34,7 +40,12 @@ namespace ServerCore
                 //Log
             }
             _serverSocket.Listen(50);
-            Socket clientSocket = _serverSocket.Accept();
+            while (!(_serverSocket.Poll(1000, SelectMode.SelectRead) && _serverSocket.Available == 0))
+            {
+                Socket clientSocket = _serverSocket.Accept();
+                _clientConnections.Add(clientSocket);
+                _connectionHandler.HandleNewConnection(clientSocket);
+            }
         }
 
         public void Stop()
