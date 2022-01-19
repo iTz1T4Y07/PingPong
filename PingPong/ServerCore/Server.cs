@@ -34,6 +34,12 @@ namespace ServerCore
                 //Log
             }
             _serverSocket.Listen(50);
+            Socket clientSocket = _serverSocket.Accept();            
+        }
+
+        public void Stop()
+        {
+            _serverSocket.Close();
         }
     }
 }
