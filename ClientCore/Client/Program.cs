@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClientCore
+namespace Client
 {
     class Program
     {
         static void Main(string[] args)
         {
+            Bootstrapper bootstrapper = new Bootstrapper();
+            bootstrapper.Run();
         }
     }
 }
