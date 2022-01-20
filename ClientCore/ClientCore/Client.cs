@@ -10,7 +10,7 @@ namespace ClientCore
 {
     public class Client<T>
     {
-        private Socket _socket;
+        private TcpClient _client;
 
         IGetInput<T> _inputGetter;
 
@@ -18,8 +18,8 @@ namespace ClientCore
 
         public Client(IPAddress ip, int port, IGetInput<T> inputGetter, IDataConvert<T> dataConverter)
         {
-            _socket = new Socket(SocketType.Stream, ProtocolType.Tcp);
-            _socket.Connect(ip, port);
+            _client = new TcpClient();
+            _client.Connect(ip, port);            
 
             _inputGetter = inputGetter;
             _dataConverter = dataConverter;
@@ -30,11 +30,42 @@ namespace ClientCore
             while (true)
             {
                 T input = _inputGetter.GetInput();
-                _socket.Send(_dataConverter.Convert(input));
-                byte[] receivedData = new byte[1024];
-                _socket.Receive(receivedData);
+                byte[] bytes = _dataConverter.Convert(input);
+                SendData(bytes);
+                byte[] receivedData = ReadData();                
                 Console.WriteLine(Encoding.ASCII.GetString(receivedData.Where(byteValue => byteValue != 0).ToArray()));
             }
+        }
+
+        private bool SendData( byte[] dataToSend)
+        {
+            _client.SendBufferSize = dataToSend.Length;
+            NetworkStream stream = _client.GetStream();
+            if (!(stream.CanWrite))
+            {
+                return false;
+            }
+
+            stream.Write(dataToSend, 0, dataToSend.Length);
+            return true;
+        }
+
+        private byte[] ReadData()
+        {            
+            NetworkStream stream = _client.GetStream();
+            if (!stream.CanRead)
+            {
+                return null;
+            }
+
+            if (_client.ReceiveBufferSize <= 0)
+            {
+                _client.ReceiveBufferSize = 1024;
+            }
+
+            byte[] receivedData = new byte[_client.ReceiveBufferSize];
+            stream.Read(receivedData, 0, _client.ReceiveBufferSize);
+            return receivedData;
         }
     }
 }
