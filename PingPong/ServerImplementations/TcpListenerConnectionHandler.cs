@@ -17,9 +17,17 @@ namespace ServerImplementations
             _dataProcessor = dataProcessor;
         }
 
-        public Task HandleNewConnection(TcpClient clientSocket)
+        public async Task HandleNewConnection(TcpClient client)
         {
-            throw new NotImplementedException();
+            while (true)
+            {
+                Task<byte[]> readData = ReadData(client);
+                byte[] receivedData = await readData;
+                if (!(receivedData is null))
+                {
+                    await SendData(client, _dataProcessor.GetDataToReturn(receivedData));
+                }
+            }
         }
 
         private async Task<byte[]> ReadData(TcpClient client)
