@@ -11,24 +11,20 @@ namespace ServerCore
 {
     public class Server
     {
-        private Socket _serverSocket;
+        private readonly TcpListener _listener;
 
-        private readonly IPEndPoint _socketConfiguration;
+        private IConnectionHandler<TcpClient> _connectionHandler;
 
-        private IConnectionHandler<Socket> _connectionHandler;
+        private IList<TcpClient> _clientConnections;
 
-        private IList<Socket> _clientConnections;
-
-        public Server(int port, IConnectionHandler<Socket> connectionHandler)
-        {
+        public Server(int port, IConnectionHandler<TcpClient> connectionHandler)
+        {          
             _connectionHandler = connectionHandler;
-            _clientConnections = new List<Socket>();
-            _serverSocket = new Socket(SocketType.Stream, ProtocolType.Tcp);
-            _socketConfiguration = new IPEndPoint(IPAddress.Any, port);
-            _serverSocket.Bind(_socketConfiguration);
+            _clientConnections = new List<TcpClient>();
+            _listener = TcpListener.Create(port);            
         }
 
-        public void Start()
+        public async Task Start()
         {
             int maxPendingConnectionsQueue = 10;
             try
@@ -39,18 +35,19 @@ namespace ServerCore
             {
                 //Log
             }
-            _serverSocket.Listen(50);
-            while (!(_serverSocket.Poll(1000, SelectMode.SelectRead) && _serverSocket.Available == 0))
+
+            _listener.Start(maxPendingConnectionsQueue);                        
+            while (_listener.Server.IsBound)
             {
-                Socket clientSocket = _serverSocket.Accept();
-                _clientConnections.Add(clientSocket);
-                _connectionHandler.HandleNewConnection(clientSocket);
+                TcpClient newClient = await _listener.AcceptTcpClientAsync();                
+                _clientConnections.Add(newClient);
+                _  = _connectionHandler.HandleNewConnection(newClient);
             }
         }
 
         public void Stop()
         {
-            _serverSocket.Close();
+            _listener.Stop();
         }
     }
 }

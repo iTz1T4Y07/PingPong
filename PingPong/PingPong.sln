@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerCore", "ServerCore\Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerImplementations", "ServerImplementations\ServerImplementations.csproj", "{EF8E2ECA-A240-49D0-B33D-8D7FE573322C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PingPong.Common", "PingPong.Common\PingPong.Common.csproj", "{FB1BFFB6-9928-4B98-B8AF-B56E02A041D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EF8E2ECA-A240-49D0-B33D-8D7FE573322C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF8E2ECA-A240-49D0-B33D-8D7FE573322C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF8E2ECA-A240-49D0-B33D-8D7FE573322C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB1BFFB6-9928-4B98-B8AF-B56E02A041D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB1BFFB6-9928-4B98-B8AF-B56E02A041D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB1BFFB6-9928-4B98-B8AF-B56E02A041D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB1BFFB6-9928-4B98-B8AF-B56E02A041D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
