@@ -37,6 +37,7 @@ namespace ServerImplementations
             {
                 return null;
             }
+
             if (client.ReceiveBufferSize <= 0)
             {
                 client.ReceiveBufferSize = 1024;
@@ -49,6 +50,7 @@ namespace ServerImplementations
 
         private async Task<bool> SendData(TcpClient client, byte[] dataBuffer)
         {
+            client.SendBufferSize = dataBuffer.Length;
             NetworkStream stream = client.GetStream();
             if (!stream.CanWrite)
             {
