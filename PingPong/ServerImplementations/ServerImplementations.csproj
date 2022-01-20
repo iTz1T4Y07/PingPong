@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PersonObjectProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SocketConnectionHandler.cs" />
     <Compile Include="StringDataProcessor.cs" />
+    <Compile Include="TcpListenerConnectionHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ServerCore\ServerCore.csproj">
