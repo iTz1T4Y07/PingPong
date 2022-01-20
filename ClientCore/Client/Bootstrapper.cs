@@ -14,11 +14,13 @@ namespace Client
     {
         public void Run()
         {
-            Console.WriteLine("===Client===");
+            /*Console.WriteLine("===Client===");
             Console.WriteLine("Please enter the desired IP");
             IPAddress serverIp = IPAddress.Parse(Console.ReadLine());
             Console.WriteLine("Please enter the desired port");
-            int clientPort = int.Parse(Console.ReadLine());
+            int clientPort = int.Parse(Console.ReadLine());*/
+            IPAddress serverIp = IPAddress.Loopback;
+            int clientPort = 9090;
             Client<Person> client = new Client<Person>(serverIp, clientPort, new PersonInputGetter(), new PersonDataConverter());
             client.Run();
         }

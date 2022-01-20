@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace PingPong.Common
 {
+    [Serializable]
     public class Person
     {
         private string _name;
 
         private int _age;
+
+        public string Name { get => _name; }
+
+        public int Age { get => _age; }
 
         public Person(string name, int age)
         {

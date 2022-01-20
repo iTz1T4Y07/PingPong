@@ -25,7 +25,7 @@ namespace ServerImplementations
                 return new byte[1] { 0 };
                 //Change Console to log
             }
-
+            Console.WriteLine("test");
             Console.WriteLine($"Received new person! [{personReceived.ToString()}]");
             return receivedData;
         }
