@@ -13,7 +13,8 @@ namespace ServerImplementations
     {
         public byte[] GetDataToReturn(byte[] receivedData)
         {
-            string jsonString = Encoding.ASCII.GetString(receivedData);
+            byte[] dataToProcess = receivedData.Where(byteValue => byteValue != 0).ToArray();
+            string jsonString = Encoding.ASCII.GetString(dataToProcess);
             Person personReceived;
             try
             {
@@ -25,7 +26,6 @@ namespace ServerImplementations
                 return new byte[1] { 0 };
                 //Change Console to log
             }
-            Console.WriteLine("test");
             Console.WriteLine($"Received new person! [{personReceived.ToString()}]");
             return receivedData;
         }

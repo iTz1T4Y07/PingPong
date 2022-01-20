@@ -1,9 +1,11 @@
-﻿using System;
+﻿using PingPong.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace ClientCore
@@ -35,7 +37,9 @@ namespace ClientCore
                     byte[] bytes = _dataConverter.Convert(input);
                     SendData(bytes);
                     byte[] receivedData = ReadData();
-                    Console.WriteLine(Encoding.ASCII.GetString(receivedData.Where(byteValue => byteValue != 0).ToArray()));
+                    string jsonString = Encoding.ASCII.GetString(receivedData.Where(byteValue => byteValue != 0).ToArray());
+                    Person receivedPerson = JsonSerializer.Deserialize<Person>(jsonString);
+                    Console.WriteLine(receivedPerson.ToString());
                 }
             }
         }
