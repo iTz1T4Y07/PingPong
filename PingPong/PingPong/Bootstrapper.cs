@@ -18,10 +18,10 @@ namespace PingPong
             Console.WriteLine("===Server===");
             Console.WriteLine("Please enter the desired port");
             int serverPort = int.Parse(Console.ReadLine());
-            IDataProcessor dataProcessor = new StringDataProcessor();
-            IConnectionHandler<Socket> connectionHandler = new SocketConnectionHandler(dataProcessor);
+            IDataProcessor dataProcessor = new PersonObjectProcessor();
+            IConnectionHandler<TcpClient> connectionHandler = new TcpListenerConnectionHandler(dataProcessor);
             Server server = new Server(serverPort, connectionHandler);
-            server.Start();
+            server.Start().GetAwaiter().GetResult();
         }
 
     }

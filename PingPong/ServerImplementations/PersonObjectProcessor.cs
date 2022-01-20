@@ -19,7 +19,7 @@ namespace ServerImplementations
             {
                 personReceived = JsonSerializer.Deserialize<Person>(jsonString);
             }
-            catch(JsonException e)
+            catch (JsonException e)
             {
                 Console.WriteLine($"Failed to deserialize person. {e}");
                 return new byte[1] { 0 };
