@@ -25,6 +25,10 @@ namespace ServerImplementations
         private async Task<byte[]> ReadData(TcpClient client)
         {
             NetworkStream stream = client.GetStream();
+            if (!stream.CanRead)
+            {
+                return null;
+            }
             if (client.ReceiveBufferSize <= 0)
             {
                 client.ReceiveBufferSize = 1024;
@@ -33,6 +37,18 @@ namespace ServerImplementations
             byte[] buffer = new byte[client.ReceiveBufferSize];
             await stream.ReadAsync(buffer, 0, buffer.Length);
             return buffer;
-        }        
+        }
+
+        private async Task<bool> SendData(TcpClient client, byte[] dataBuffer)
+        {
+            NetworkStream stream = client.GetStream();
+            if (!stream.CanWrite)
+            {
+                return false;
+            }
+
+            await stream.WriteAsync(dataBuffer, 0, dataBuffer.Length);
+            return true;
+        }
     }
 }
