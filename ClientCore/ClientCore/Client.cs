@@ -28,12 +28,15 @@ namespace ClientCore
         public void Run()
         {
             while (true)
-            {
+            {                
                 T input = _inputGetter.GetInput();
+                if (!(input != null))
+                {
                 byte[] bytes = _dataConverter.Convert(input);
                 SendData(bytes);
                 byte[] receivedData = ReadData();                
                 Console.WriteLine(Encoding.ASCII.GetString(receivedData.Where(byteValue => byteValue != 0).ToArray()));
+                }
             }
         }
 
