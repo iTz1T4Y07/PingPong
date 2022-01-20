@@ -19,7 +19,7 @@ namespace ClientCore
         public Client(IPAddress ip, int port, IGetInput<T> inputGetter, IDataConvert<T> dataConverter)
         {
             _client = new TcpClient();
-            _client.Connect(ip, port);            
+            _client.Connect(ip, port);
 
             _inputGetter = inputGetter;
             _dataConverter = dataConverter;
@@ -28,19 +28,19 @@ namespace ClientCore
         public void Run()
         {
             while (true)
-            {                
+            {
                 T input = _inputGetter.GetInput();
-                if (!(input != null))
+                if (input != null)
                 {
-                byte[] bytes = _dataConverter.Convert(input);
-                SendData(bytes);
-                byte[] receivedData = ReadData();                
-                Console.WriteLine(Encoding.ASCII.GetString(receivedData.Where(byteValue => byteValue != 0).ToArray()));
+                    byte[] bytes = _dataConverter.Convert(input);
+                    SendData(bytes);
+                    byte[] receivedData = ReadData();
+                    Console.WriteLine(Encoding.ASCII.GetString(receivedData.Where(byteValue => byteValue != 0).ToArray()));
                 }
             }
         }
 
-        private bool SendData( byte[] dataToSend)
+        private bool SendData(byte[] dataToSend)
         {
             _client.SendBufferSize = dataToSend.Length;
             NetworkStream stream = _client.GetStream();
@@ -54,7 +54,7 @@ namespace ClientCore
         }
 
         private byte[] ReadData()
-        {            
+        {
             NetworkStream stream = _client.GetStream();
             if (!stream.CanRead)
             {

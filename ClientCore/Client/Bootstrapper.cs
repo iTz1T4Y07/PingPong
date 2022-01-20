@@ -1,5 +1,6 @@
 ﻿using ClientCore;
 using ClientImplementations;
+using PingPong.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Client
             IPAddress serverIp = IPAddress.Parse(Console.ReadLine());
             Console.WriteLine("Please enter the desired port");
             int clientPort = int.Parse(Console.ReadLine());
-            Client<string> client = new Client<string>(serverIp, clientPort, new StringInputGetter(), new StringDataConverter());
+            Client<Person> client = new Client<Person>(serverIp, clientPort, new PersonInputGetter(), new PersonDataConverter());
             client.Run();
         }
     }
