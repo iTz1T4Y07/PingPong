@@ -21,5 +21,18 @@ namespace ServerImplementations
         {
             throw new NotImplementedException();
         }
+
+        private async Task<byte[]> ReadData(TcpClient client)
+        {
+            NetworkStream stream = client.GetStream();
+            if (client.ReceiveBufferSize <= 0)
+            {
+                client.ReceiveBufferSize = 1024;
+            }
+
+            byte[] buffer = new byte[client.ReceiveBufferSize];
+            await stream.ReadAsync(buffer, 0, buffer.Length);
+            return buffer;
+        }        
     }
 }
